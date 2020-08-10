@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--나눔고딕-->
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+</head>
+<style>
+    body{
+        font-family: 'NanumSquare', sans-serif;
+        margin:0px;
+        padding:0px;
+        width:100%;
+        height:100vh;
+    }
+
+</style>
+<body>
+    <div class="container-fluid" style="width:100%;">
+        <div class="row">
+            <div style="width:100%; position:relative;">
+                <img src="{% static 'allergykitmain/img/upbar.png' %}" style="width:100%;">
+            </div>
+            <div style="width:100%; position: absolute; color:rgb(255,255,255); margin-top:8%; padding-left:34%; font-size:5vw;">
+                상세 결과 확인
+            </div>
+            <div class="row" style="width:100%; margin-top:1vh; text-align:center; color:#CFDB9E;">
+                <div class="col-sm-2" id="fish_part" name="fish" style="width:18%; margin-left:5%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=1 %}" style="color:#CFDB9E;"><div>생선</div>
+                    <div style="font-size:2vh;">fish</div></a>
+                </div>
+                <div class="col-sm-2" id="flour_part" name="flour" style="width:23%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=2 %}" style="color:#CFDB9E;"><div>밀가루</div></a>
+                    <div style="font-size:2vh;">flour</div>
+                </div>
+                <div class="col-sm-2" id="milk_part" name="milk" style="width:18%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=3 %}" style="color:#CFDB9E;"><div>우유</div></a>
+                    <div style="font-size:2vh;">milk</div>
+                </div>   
+                <div class="col-sm-2" id="meat_part" name="meat" style="width:18%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=4 %}" style="color:#000000;"><div>고기</div></a>
+                    <div style="font-size:2vh; color:#000000;">meat</div>
+                </div>
+                <div class="col-sm-2" id="fruit_part" name="fruit" style="width:18%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=5 %}" style="color:#CFDB9E;"><div>과일</div></a>
+                    <div style="font-size:2vh;">fruit</div>
+                </div>
+            </div>
+            <div class="row" style="width:100%; margin-top:1vh; text-align:center; color:#CFDB9E;">
+                <div class="col-sm-2" id="cheese_part" name="cheese" style="width:18%; margin-left:5%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=6 %}" style="color:#CFDB9E;"><div>치즈</div></a>
+                    <div style="font-size:2vh;">cheese</div>
+                </div>
+                <div class="col-sm-2" id="alcohol_part" name="alcohol" style="width:23%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=7 %}" style="color:#CFDB9E;"><div>술</div></a>
+                    <div style="font-size:2vh;">alcohol</div>
+                </div>
+                <div class="col-sm-2" id="egg_part" name="egg" style="width:18%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=8 %}" style="color:#CFDB9E;"><div>계란</div></a>
+                    <div style="font-size:2vh;">egg</div>
+                </div>   
+                <div class="col-sm-2" id="chicken_part" name="chicken" style="width:18%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=9 %}" style="color:#CFDB9E;"><div>닭</div></a>
+                    <div style="font-size:2vh;">chicken</div>
+                </div>
+                <div class="col-sm-2" id="vgt_part" name="vgt" style="width:18%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=10 %}" style="color:#CFDB9E;"><div>야채</div></a>
+                    <div style="font-size:2vh;">vgt</div>
+                </div>
+            </div>
+            <div style="width:100%; position:relative;">
+                <div style="position:absolute; font-size:5px; margin-top:4vh; margin-left:33%;">
+                    {{usr_allergy_info.Al_CreateDate}}
+                </div>
+                {% if meat < 21 %}
+                    <img src="{% static 'allergykitmain/img/allergy_chart_1.png' %}" style="width:100%;">
+                {% elif meat < 31%}
+                    <img src="{% static 'allergykitmain/img/allergy_chart_2.png' %}" style="width:100%;">
+                {% elif meat < 41 %}
+                    <img src="{% static 'allergykitmain/img/allergy_chart_3.png' %}" style="width:100%;">
+                {% elif meat < 51 %}
+                    <img src="{% static 'allergykitmain/img/allergy_chart_4.png' %}" style="width:100%;">
+                {% elif meat < 61 %}
+                    <img src="{% static 'allergykitmain/img/allergy_chart_5.png' %}" style="width:100%;">
+                {% elif meat > 61 %}
+                    <img src="{% static 'allergykitmain/img/allergy_chart_6.png' %}" style="width:100%;">
+                {% endif %}
+            </div>
+            <div class="row" style="width:100%; margin-top:5vh;">
+                 <div class="col-sm-3" style="width:35%; margin-left:4%;">
+                    <img src="{% static 'allergykitmain/img/green_cir.png' %}" style="width:10%;">  항목 안내
+                </div>
+                <div class="col-sm-9" style="border-bottom: 2px solid #A9D18E; width:60%; position:relative;" id="item_guide">
+                    <div style="position:absolute; width:100%; margin-left:85%;" >
+                        <img src="{% static 'allergykitmain/img/green_arrow.png' %}" style="width:5%;">
+                    </div>
+                </div>
+            </div>
+            <div id="item_guide_hide" style="display: none; margin-left:4%; width:90%; margin-top:2vh; text-align:justify;">
+                육류에 양성 반응이 나왔을 경우 근처 피부과를 확인하여 진단하시기 바랍니다. 육류의 종류에서 소고기, 돼지고기의 성분이 다르기 때문입니다. 
+                또한 제한할 경우 반드시 정확한 진단에 근거해야 합니다. 고기를 전부 제한하면 철(고기 속에 함유된 철분) 흡수의 저하에 따른 빈혈이 생길 수 있습니다.
+            </div>
+            <div class="row" style="width:100%; margin-top:5vh;">
+                 <div class="col-sm-3" style="width:35%; margin-left:4%;">
+                    <img src="{% static 'allergykitmain/img/green_cir.png' %}" style="width:10%;">  위험 약품
+                </div>
+                <div class="col-sm-9" style="border-bottom: 2px solid #A9D18E; width:60%; position:relative;" id="dangerous_drugs">
+                    <div style="position:absolute; width:100%; margin-left:85%;" >
+                        <img src="{% static 'allergykitmain/img/green_arrow.png' %}" style="width:5%;">
+                    </div>
+                </div>
+            </div>
+            <div id="dangerous_drugs_hide" style="display: none; margin-left:4%; width:90%; margin-top:2vh; text-align:justify;">
+                위험 약품으로는 통풍약에 주의해야 합니다. 요산 증가의 원인이 될 수 있습니다.
+            </div>
+            <div class="row" style="width:100%; margin-top:5vh;">
+                 <div class="col-sm-3" style="width:35%; margin-left:4%;">
+                    <img src="{% static 'allergykitmain/img/green_cir.png' %}" style="width:10%;">  증상
+                </div>
+                <div class="col-sm-9" style="border-bottom: 2px solid #A9D18E; width:60%; position:relative;" id="symptom">
+                    <div style="position:absolute; width:100%; margin-left:85%;" >
+                        <img src="{% static 'allergykitmain/img/green_arrow.png' %}" style="width:5%;">
+                    </div>
+                </div>
+            </div>
+            <div id="symptom_hide" style="display: none; margin-left:4%; width:90%; margin-top:2vh; text-align:justify;">
+                육류 알레르기는 고령층에서 자주 발생하는 증상입니다. 육류 속 탄수화물에 대해 알레르기 반응이 일어나는 것인데요, 
+                이 알레르기를 가진 사람은 포유류 고기에만 반응하며, 닭고기와 같은 비 포유류 고기는 섭취해도 안전하다고 합니다
+            </div>
+            <div style="width:100%; margin-left:80%; margin-top:10vh;">
+                <a href="{% url 'allergykitmain:menu_choice' %}"><img src="{% static 'allergykitmain/img/result_lookup_btn.png' %}" style="height:4vh;"></a>
+            </div>
+            <div style="width:100%; padding-left:38vw; margin-top:2%;">
+                <img src="{% static 'allergykitmain/img/logo.png' %}" style="height:10vh;">
+            <div>
+        </div>
+    </div>
+<script>
+$(document).ready(function(){
+    $("#item_guide").click(function(){
+        if($("#item_guide_hide").is(":visible")){
+            $("#item_guide_hide").slideUp();
+        }else{
+            $("#item_guide_hide").slideDown();
+        }
+    });
+});
+$(document).ready(function(){
+    $("#dangerous_drugs").click(function(){
+        if($("#dangerous_drugs_hide").is(":visible")){
+            $("#dangerous_drugs_hide").slideUp();
+        }else{
+            $("#dangerous_drugs_hide").slideDown();
+        }
+    });
+});
+$(document).ready(function(){
+    $("#symptom").click(function(){
+        if($("#symptom_hide").is(":visible")){
+            $("#symptom_hide").slideUp();
+        }else{
+            $("#symptom_hide").slideDown();
+        }
+    });
+});
+</script>
+</body>
+</html>

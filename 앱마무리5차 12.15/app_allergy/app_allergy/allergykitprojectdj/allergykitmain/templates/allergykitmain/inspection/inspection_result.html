@@ -1,0 +1,239 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--나눔고딕-->
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+</head>
+<style>
+    body{
+        font-family: 'NanumSquare', sans-serif;
+        margin:0px;
+        padding:0px;
+        width:100%;
+        height:100vh;
+    }
+
+</style>
+<body>
+    <div class="container-fluid" style="width:100%;">
+        <div class="row">
+            <div style="width:100%; position:relative;">
+                <img src="{% static 'allergykitmain/img/upbar.png' %}" style="width:100%;">
+            </div>
+            <div style="width:100%; position: absolute; color:rgb(255,255,255); margin-top:8%; padding-left:39%; font-size:5vw;">
+                결과 확인
+            </div>
+            <div>
+                <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy.id allergy_kinds=1 %}"><img src="{% static 'allergykitmain/img/arrow.png' %}" style="width:10%; margin-left:85%;"></a>
+            </div>
+            <div style="width:100%; position:relative;">
+                <div style="width:100%; position: absolute;">
+                    {% if allergy_count == 0 %}
+                        <img src="{% static 'allergykitmain/img/0.png' %}" style="width:60%; margin-left:20%; padding-top:5%;">
+                    {% elif allergy_count == 1 %}
+                        <img src="{% static 'allergykitmain/img/1.png' %}" style="width:60%; margin-left:20%;">
+                    {% elif allergy_count == 2 %}
+                        <img src="{% static 'allergykitmain/img/2.png' %}" style="width:60%; margin-left:21%;">
+                    {% elif allergy_count == 3 %}
+                        <img src="{% static 'allergykitmain/img/3.png' %}" style="width:60%; margin-left:20%; padding-top:5%;">
+                    {% elif allergy_count == 4 %}
+                        <img src="{% static 'allergykitmain/img/4.png' %}" style="width:60%; margin-left:20%; padding-top:5%;">
+                    {% elif allergy_count == 5 %}
+                        <img src="{% static 'allergykitmain/img/5.png' %}" style="width:60%; margin-left:20%; padding-top:5%;">
+                    {% elif allergy_count == 6 %}
+                        <img src="{% static 'allergykitmain/img/6.png' %}" style="width:60%; margin-left:20%; padding-top:5%;">
+                    {% elif allergy_count == 7 %}
+                        <img src="{% static 'allergykitmain/img/7.png' %}" style="width:60%; margin-left:20%; padding-top:5%;">
+                    {% elif allergy_count == 8 %}
+                        <img src="{% static 'allergykitmain/img/8.png' %}" style="width:60%; margin-left:20%; padding-top:5%;">
+                    {% elif allergy_count == 9 %}
+                        <img src="{% static 'allergykitmain/img/9.png' %}" style="width:60%; margin-left:20%; ">
+                    {% else %}
+                        <img src="{% static 'allergykitmain/img/10.png' %}" style="width:60%; margin-left:23%;">
+                    {% endif %}
+                </div>
+                <div id="people_img" style="width:100%; position: absolute;">
+                    <img src="{% static 'allergykitmain/img/people_new.png' %}" style="width:20%; margin-left:40%; margin-top:25%;">
+                </div>
+                <div id="allergy_count" style="width:100%; position: absolute; color:#344626; font-size:4vh; margin-left:43%; margin-top:50%;">
+                    {{allergy_count}}/10
+                </div>
+            </div>
+            <div id="allergy_date" style="width:100%; font-size:2vh; margin-left:18%; margin-top:70%;">
+                검사 날짜 : {{usr_allergy.Al_CreateDate}}
+            </div>
+            <div id="allergy_date" style="width:100%; font-size:2.5vh; margin-left:14%; padding-top:2%;">
+                {{danger_allergy}}개의 항목이 정상 범위 밖에 있습니다.
+            </div>
+            <div class="row" style="margin:0px; padding:0px; margin-top:3vh;">
+                {% for name, area in allergy_list.items %}
+                    {% if area >= 40 %}
+                        {% if name == 'fish_al' %}
+                        <div class="col-sm-3" style="width:50%; position:relative; margin:0px; padding:0px;">
+                            <div style="width:100%; position:absolute; margin-left:40%; margin-top:30%;">
+                                생선
+                            </div>
+                            <div id="fish_al" style="width:50vw; text-align:center;  margin:0px; padding:0px;">
+                                {% if area <= 49.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_5.png' %}" style="width:60%;">
+                                {% elif area <= 59.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_6.png' %}" style="width:60%;">
+                                {% else %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_7.png' %}" style="width:60%;">
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% elif name == 'flour_al' %}
+                        <div class="col-sm-3" style="width:50%; position:relative; margin:0px; padding:0px;">
+                            <div style="position:absolute; margin-left:37%; margin-top:30%;">
+                                밀가루
+                            </div>
+                            <div id="fish_al" style="width:50vw; text-align:center;  margin:0px; padding:0px;">
+                                {% if area <= 49.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_5.png' %}" style="width:60%;">
+                                {% elif area <= 59.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_6.png' %}" style="width:60%;">
+                                {% else %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_7.png' %}" style="width:60%;">
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% elif name == 'milk_al' %}
+                        <div class="col-sm-3" style="width:50%; position:relative; margin:0px; padding:0px;">
+                            <div style="position:absolute; margin-left:40%; margin-top:30%;">
+                                우유
+                            </div>
+                            <div id="fish_al" style="width:50vw; text-align:center; margin:0px; padding:0px;">
+                                {% if area <= 49.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_5.png' %}" style="width:60%;">
+                                {% elif area <= 59.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_6.png' %}" style="width:60%;">
+                                {% else %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_7.png' %}" style="width:60%;">
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% elif name == 'meat_al' %}
+                        <div class="col-sm-3" style="width:50%; position:relative; margin:0px; padding:0px;">
+                            <div style="position:absolute; margin-left:40%; margin-top:30%;">
+                                고기
+                            </div>
+                            <div id="fish_al" style="width:50vw; text-align:center;  margin:0px; padding:0px;">
+                                {% if area <= 49.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_5.png' %}" style="width:60%;">
+                                {% elif area <= 59.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_6.png' %}" style="width:60%;">
+                                {% else %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_7.png' %}" style="width:60%;">
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% elif name == 'fruit_al' %}
+                        <div class="col-sm-3" style="width:50%; position:relative; margin:0px; padding:0px;">
+                            <div style="position:absolute; margin-left:40%; margin-top:30%;">
+                                과일
+                            </div>
+                            <div id="fish_al" style="width:50vw; text-align:center;  margin:0px; padding:0px;">
+                                {% if area <= 49.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_5.png' %}" style="width:60%;">
+                                {% elif area <= 59.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_6.png' %}" style="width:60%;">
+                                {% else %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_7.png' %}" style="width:60%;">
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% elif name == 'cheese_al' %}
+                        <div class="col-sm-3" style="width:50%; position:relative; margin:0px; padding:0px;">
+                            <div style="position:absolute; margin-left:40%; margin-top:30%;">
+                                치즈
+                            </div>
+                            <div id="fish_al" style="width:50vw; text-align:center;  margin:0px; padding:0px;">
+                                {% if area <= 49.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_5.png' %}" style="width:60%;">
+                                {% elif area <= 59.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_6.png' %}" style="width:60%;">
+                                {% else %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_7.png' %}" style="width:60%;">
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% elif name == 'alcohol_al' %}
+                        <div class="col-sm-3" style="width:50%; position:relative; margin:0px; padding:0px;">
+                            <div style="position:absolute; margin-left:45%; margin-top:30%;">
+                                술
+                            </div>
+                            <div id="fish_al" style="width:50vw; text-align:center;  margin:0px; padding:0px;">
+                                {% if area <= 49.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_5.png' %}" style="width:60%;">
+                                {% elif area <= 59.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_6.png' %}" style="width:60%;">
+                                {% else %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_7.png' %}" style="width:60%;">
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% elif name == 'egg_al' %}
+                        <div class="col-sm-3" style="width:50%; position:relative; margin:0px; padding:0px;">
+                            <div style="position:absolute; margin-left:40%; margin-top:30%;">
+                                계란
+                            </div>
+                            <div id="fish_al" style="width:50vw; text-align:center;  margin:0px; padding:0px;">
+                                {% if area <= 49.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_5.png' %}" style="width:60%;">
+                                {% elif area <= 59.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_6.png' %}" style="width:60%;">
+                                {% else %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_7.png' %}" style="width:60%;">
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% elif name == 'chicken_al' %}
+                        <div class="col-sm-3" style="width:50%; position:relative; margin:0px; padding:0px;">
+                            <div style="position:absolute; margin-left:45%; margin-top:30%;">
+                                닭
+                            </div>
+                            <div id="fish_al" style="width:50vw; text-align:center;  margin:0px; padding:0px;">
+                                {% if area <= 49.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_5.png' %}" style="width:60%;">
+                                {% elif area <= 59.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_6.png' %}" style="width:60%;">
+                                {% else %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_7.png' %}" style="width:60%;">
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% elif name == 'vegetable_al' %}
+                        <div class="col-sm-3" style="width:50%; position:relative; margin:0px; padding:0px;">
+                            <div style="position:absolute; margin-left:40%; margin-top:30%;">
+                                야채
+                            </div>
+                            <div id="fish_al" style="width:50vw; text-align:center;  margin:0px; padding:0px;">
+                                {% if area <= 49.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_5.png' %}" style="width:60%;">
+                                {% elif area <= 59.99 %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_6.png' %}" style="width:60%;">
+                                {% else %}
+                                    <img src="{% static 'allergykitmain/img/allergy3_7.png' %}" style="width:60%;">
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div style="width:100%; padding-left:38vw; margin-top:10%;">
+                <img src="{% static 'allergykitmain/img/logo.png' %}" style="height:10vh;">
+            </div>     
+        </div>
+    </div>
+</body>
+</html>

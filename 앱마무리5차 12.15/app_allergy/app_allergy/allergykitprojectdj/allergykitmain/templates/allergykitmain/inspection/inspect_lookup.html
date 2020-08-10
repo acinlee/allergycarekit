@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--나눔고딕-->
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+</head>
+<style>
+    body{
+        font-family: 'NanumSquare', sans-serif;
+        margin:0px;
+        padding:0px;
+        width:100%;
+        height:100vh;
+    }
+
+</style>
+<body>
+    <div class="container-fluid" style="width:100%;">
+        <div class="row">
+            <div style="width:100%; position:relative;">
+                <img src="{% static 'allergykitmain/img/upbar.png' %}" style="width:100%;">
+            </div>
+            <div style="width:100%; position: absolute; color:rgb(255,255,255); margin-top:8%; padding-left:35%; font-size:5vw;">
+                회차 순서 확인
+            </div>
+            <div style="width:100%; margin-top:10vh;">
+                <img src="{% static 'allergykitmain/img/people_new.png' %}" style="width:25%;  margin-left:37.5%;">
+            </div>
+            <div style="width:100%; text-align:center;">
+                {{user_info.al_Name}}님
+            </div>
+            <div class="row" style="width:100%; text-align:center; margin-top:2vh;margin-left:1%; font-size:2vh;">
+                <div class="col-sm-6" style="width:50%; border-right: 1px solid #d3d3d3;">
+                    <img src="{% static 'allergykitmain/img/birth.png' %}" style="width:30%; padding-top:3%;">
+                    <div style="margin-top:1.3vh;">
+                        {{user_year}}년 {{user_month}}월 {{user_day}}일 <br>(만 {{user_age}}세)
+                    </div>
+                </div>
+                <div class="col-sm-6" style="width:50%;">
+                    <img src="{% static 'allergykitmain/img/weight.png' %}" style="width:30%;padding-top:3%;">
+                    <div style="margin-top:1vh;">
+                        {{user_info.al_Height}}cm/{{user_info.al_Weight}}kg
+                    </div>
+                </div>
+            </div>
+            <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_result_lastest.id allergy_kinds=1 %}" style="width:100%; text-decoration:none; color:#000000;"><div style="width:100%; position:relative; font-size:2vh;">
+                <div class="row" style="width:100%; position:absolute; margin-top:7%; margin-left:10%;">
+                    <div style="width:30%;" class="col-sm-3">
+                        최근 검사 
+                    </div>
+                    <div class="col-sm-3" style="width:60%; margin-left:1%;">
+                        {{allergy_result_list_count}}회차 {{ usr_result_lastest.Al_CreateDate|date:"Y.m.d | H:i "}}
+                    </div>
+                    <div style="width:100%; font-size:1vh; margin-left:65%;">
+                        정상 : {{not_allergy_count}}
+                    </div>
+                    <div style="width:100%; font-size:1vh; margin-left:65%;">
+                        의심 : {{allergy_count}}
+                    </div>
+                </div>
+                {% if allergy_add_all < 101 %}
+                    <img src="{% static 'allergykitmain/img/lastest1.png' %}" style="width:100%;">
+                {% elif allergy_add_all < 201 %}
+                    <img src="{% static 'allergykitmain/img/lastest2.png' %}" style="width:100%;">
+                {% elif allergy_add_all < 301 %}
+                    <img src="{% static 'allergykitmain/img/lastest3.png' %}" style="width:100%;">
+                {% elif allergy_add_all < 401 %}
+                    <img src="{% static 'allergykitmain/img/lastest4.png' %}" style="width:100%;">
+                {% elif allergy_add_all < 501 %}
+                    <img src="{% static 'allergykitmain/img/lastest5.png' %}" style="width:100%;">
+                {% elif allergy_add_all < 601 %}
+                    <img src="{% static 'allergykitmain/img/lastest6.png' %}" style="width:100%;">
+                {% else %}
+                    <img src="{% static 'allergykitmain/img/lastest7.png' %}" style="width:100%;">
+                {% endif %}
+            </a>
+            </div>
+            {% for result_list in usr_result_list%}
+            <a href="{% url 'allergykitmain:detail_result' allergy_id=result_list.id allergy_kinds=1 %}" style="width:100%; text-decoration:none;"><div style="width:82%; background-color: #59883C; height:6vh; border-radius:10px; margin-left:9.5%; padding-left:7%; color:#ffffff; padding-top:2%; font-weight:200; margin-top:2vh;">
+                이전 검사   {{result_list.Al_CreateDate|date:"Y.m.d"}}
+            </div></a>
+            {% endfor %}
+            <div style="width:100%; padding-left:38vw; margin-top:6vh;">
+                <img src="{% static 'allergykitmain/img/logo.png' %}" style="height:10vh;">
+            <div>
+        </div>
+    </div>
+</body>
+</html>

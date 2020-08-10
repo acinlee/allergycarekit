@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--나눔고딕-->
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+</head>
+<style>
+    body{
+        font-family: 'NanumSquare', sans-serif;
+        margin:0px;
+        padding:0px;
+        width:100%;
+        height:100vh;
+    }
+
+</style>
+<body>
+    <div class="container-fluid" style="width:100%;">
+        <div class="row">
+            <div style="width:100%; position:relative;">
+                <img src="{% static 'allergykitmain/img/upbar.png' %}" style="width:100%;">
+            </div>
+            <div style="width:100%; position: absolute; color:rgb(255,255,255); margin-top:8%; padding-left:34%; font-size:5vw;">
+                상세 결과 확인
+            </div>
+            <div class="row" style="width:100%; margin-top:1vh; text-align:center; color:#CFDB9E;">
+                <div class="col-sm-2" id="fish_part" name="fish" style="width:18%; margin-left:5%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=1 %}" style="color:#CFDB9E;"><div>생선</div>
+                    <div style="font-size:2vh;">fish</div></a>
+                </div>
+                <div class="col-sm-2" id="flour_part" name="flour" style="width:23%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=2 %}" style="color:#CFDB9E;"><div>밀가루</div></a>
+                    <div style="font-size:2vh;">flour</div>
+                </div>
+                <div class="col-sm-2" id="milk_part" name="milk" style="width:18%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=3 %}" style="color:#CFDB9E;"><div>우유</div></a>
+                    <div style="font-size:2vh;">milk</div>
+                </div>   
+                <div class="col-sm-2" id="meat_part" name="meat" style="width:18%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=4 %}" style="color:#CFDB9E;"><div>고기</div></a>
+                    <div style="font-size:2vh;">meat</div>
+                </div>
+                <div class="col-sm-2" id="fruit_part" name="fruit" style="width:18%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=5 %}" style="color:#000000;"><div>과일</div></a>
+                    <div style="font-size:2vh; color:#000000;">fruit</div>
+                </div>
+            </div>
+            <div class="row" style="width:100%; margin-top:1vh; text-align:center; color:#CFDB9E;">
+                <div class="col-sm-2" id="cheese_part" name="cheese" style="width:18%; margin-left:5%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=6 %}" style="color:#CFDB9E;"><div>치즈</div></a>
+                    <div style="font-size:2vh;">cheese</div>
+                </div>
+                <div class="col-sm-2" id="alcohol_part" name="alcohol" style="width:23%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=7 %}" style="color:#CFDB9E;"><div>술</div></a>
+                    <div style="font-size:2vh;">alcohol</div>
+                </div>
+                <div class="col-sm-2" id="egg_part" name="egg" style="width:18%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=8 %}" style="color:#CFDB9E;"><div>계란</div></a>
+                    <div style="font-size:2vh;">egg</div>
+                </div>   
+                <div class="col-sm-2" id="chicken_part" name="chicken" style="width:18%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=9 %}" style="color:#CFDB9E;"><div>닭</div></a>
+                    <div style="font-size:2vh;">chicken</div>
+                </div>
+                <div class="col-sm-2" id="vgt_part" name="vgt" style="width:18%;">
+                    <a href="{% url 'allergykitmain:detail_result' allergy_id=usr_allergy_info.id allergy_kinds=10 %}" style="color:#CFDB9E;"><div>야채</div></a>
+                    <div style="font-size:2vh;">vgt</div>
+                </div>
+            </div>
+            <div style="width:100%; position:relative;">
+                <div style="position:absolute; font-size:5px; margin-top:4vh; margin-left:33%;">
+                    {{usr_allergy_info.Al_CreateDate}}
+                </div>
+                {% if fruit < 21 %}
+                    <img src="{% static 'allergykitmain/img/allergy_chart_1.png' %}" style="width:100%;">
+                {% elif fruit < 31%}
+                    <img src="{% static 'allergykitmain/img/allergy_chart_2.png' %}" style="width:100%;">
+                {% elif fruit < 41 %}
+                    <img src="{% static 'allergykitmain/img/allergy_chart_3.png' %}" style="width:100%;">
+                {% elif fruit < 51 %}
+                    <img src="{% static 'allergykitmain/img/allergy_chart_4.png' %}" style="width:100%;">
+                {% elif fruit < 61 %}
+                    <img src="{% static 'allergykitmain/img/allergy_chart_5.png' %}" style="width:100%;">
+                {% elif fruit > 61 %}
+                    <img src="{% static 'allergykitmain/img/allergy_chart_6.png' %}" style="width:100%;">
+                {% endif %}
+            </div>
+            <div class="row" style="width:100%; margin-top:5vh;">
+                 <div class="col-sm-3" style="width:35%; margin-left:4%;">
+                    <img src="{% static 'allergykitmain/img/green_cir.png' %}" style="width:10%;">  항목 안내
+                </div>
+                <div class="col-sm-9" style="border-bottom: 2px solid #A9D18E; width:60%; position:relative;" id="item_guide">
+                    <div style="position:absolute; width:100%; margin-left:85%;" >
+                        <img src="{% static 'allergykitmain/img/green_arrow.png' %}" style="width:5%;">
+                    </div>
+                </div>
+            </div>
+            <div id="item_guide_hide" style="display: none; margin-left:4%; width:90%; margin-top:2vh; text-align:justify;">
+                꽃가루 알레르기를 일으키는 단백질 성분 ‘알레르겐’과 유사한 단백질 구조를 가지고 있는 과일들이 있습니다. 알레르기를 일으키기 쉬운 과일로는 복숭아, 키위, 사과, 멜론 등이 대표적입니다.
+                처음 과일을 접할 땐 소량을 먹고 증상이 나타나지 않으면 먹을 수 있는 다른 과일이나 채소로 필요한 비타민, 미네랄 등 미량 원소, 식이섬유 등을 섭취할 수 있도록 합니다.
+            </div>
+            <div class="row" style="width:100%; margin-top:5vh;">
+                 <div class="col-sm-3" style="width:35%; margin-left:4%;">
+                    <img src="{% static 'allergykitmain/img/green_cir.png' %}" style="width:10%;">  위험 약품
+                </div>
+                <div class="col-sm-9" style="border-bottom: 2px solid #A9D18E; width:60%; position:relative;" id="dangerous_drugs">
+                    <div style="position:absolute; width:100%; margin-left:85%;" >
+                        <img src="{% static 'allergykitmain/img/green_arrow.png' %}" style="width:5%;">
+                    </div>
+                </div>
+            </div>
+            <div id="dangerous_drugs_hide" style="display: none; margin-left:4%; width:90%; margin-top:2vh; text-align:justify;">
+                위험 약품은 제산제입니다. 오렌지 등에 있는 성분이 위산 억제 효과를 약화시키기 때문에 주의하셔야 합니다.
+            </div>
+            <div class="row" style="width:100%; margin-top:5vh;">
+                 <div class="col-sm-3" style="width:35%; margin-left:4%;">
+                    <img src="{% static 'allergykitmain/img/green_cir.png' %}" style="width:10%;">  증상
+                </div>
+                <div class="col-sm-9" style="border-bottom: 2px solid #A9D18E; width:60%; position:relative;" id="symptom">
+                    <div style="position:absolute; width:100%; margin-left:85%;" >
+                        <img src="{% static 'allergykitmain/img/green_arrow.png' %}" style="width:5%;">
+                    </div>
+                </div>
+            </div>
+            <div id="symptom_hide" style="display: none; margin-left:4%; width:90%; margin-top:2vh; text-align:justify;">
+                과일 알레르기를 일시적인 두드러기로 생각하고 무심코 넘겼다가는 생명까지 위협받을 수 있습니다. 맥박이 빨라지고 혈압이 내려가 어지러움을 느끼고 심한 경우 아나필락시스 쇼크(알레르기성 과민반응)라는 쇼크까지 일어날 수 있기 때문입니다. 
+                알레르기 유발 물질이 많은 껍질과 씨는 제거하고 먹는 것도 도움이 되며, 증상이 심하면 병원을 찾아 항히스타민제 복용 등으로 알레르기를 조절해야 합니다.
+            </div>
+            <div style="width:100%; margin-left:80%; margin-top:10vh;">
+                <a href="{% url 'allergykitmain:menu_choice' %}"><img src="{% static 'allergykitmain/img/result_lookup_btn.png' %}" style="height:4vh;"></a>
+            </div>
+            <div style="width:100%; padding-left:38vw; margin-top:2%;">
+                <img src="{% static 'allergykitmain/img/logo.png' %}" style="height:10vh;">
+            <div>
+        </div>
+    </div>
+<script>
+$(document).ready(function(){
+    $("#item_guide").click(function(){
+        if($("#item_guide_hide").is(":visible")){
+            $("#item_guide_hide").slideUp();
+        }else{
+            $("#item_guide_hide").slideDown();
+        }
+    });
+});
+$(document).ready(function(){
+    $("#dangerous_drugs").click(function(){
+        if($("#dangerous_drugs_hide").is(":visible")){
+            $("#dangerous_drugs_hide").slideUp();
+        }else{
+            $("#dangerous_drugs_hide").slideDown();
+        }
+    });
+});
+$(document).ready(function(){
+    $("#symptom").click(function(){
+        if($("#symptom_hide").is(":visible")){
+            $("#symptom_hide").slideUp();
+        }else{
+            $("#symptom_hide").slideDown();
+        }
+    });
+});
+</script>
+</body>
+</html>
